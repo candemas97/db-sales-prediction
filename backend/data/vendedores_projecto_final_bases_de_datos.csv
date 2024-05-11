@@ -1,6 +1,6 @@
-numero_vendedor,username,password,first_name,last_name
-NV-0,carmas,supersecret,Carlos,Masmela
-NV-1,yupe,supersecret,Yudy,Pedraza
-NV-2,fama,supersecret,Fabian,Madero
-NV-3,elsa,supersecret,Elkin,Sanchez
-NV-4,gial,supersecret,Giovanny,Albarracin
+numero_vendedor,username,password,first_name,last_name,title
+NV-0,carmas,supersecret,Carlos,Masmela,Sales Manager
+NV-1,yupe,supersecret,Yudy,Pedraza,Sales Executive
+NV-2,fama,supersecret,Fabian,Madero,VP Sales
+NV-3,elsa,supersecret,Elkin,Sanchez,EVP Sales
+NV-4,gial,supersecret,Giovanny,Albarracin,Sales Assistant

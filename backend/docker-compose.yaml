@@ -80,6 +80,11 @@ x-airflow-common:
     REDIS_HOST: ${REDIS_HOST}
     REDIS_PORT: ${REDIS_PORT}
     REDIS_PASSWORD: ${REDIS_PASSWORD}
+    SQL_USER: ${SQL_USER}
+    SQL_PASSWORD: ${SQL_PASSWORD}
+    SQL_HOST: ${SQL_HOST}
+    SQL_PORT: ${SQL_PORT}
+    SQL_DATABASE: ${SQL_DATABASE}
 
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/docker/code:/opt/airflow/dags

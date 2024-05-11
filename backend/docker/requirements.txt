@@ -1,6 +1,8 @@
 # Obligatory dependencies
 pymongo==4.7.1
 redis==5.0.1
+sqlalchemy==1.4.48
+pyodbc==5.1.0
 python-dotenv==1.0.1
 pandas==2.0.1
 scikit-learn==1.3.0 # 1.2.2
