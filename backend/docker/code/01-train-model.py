@@ -38,7 +38,7 @@ def read_data(USERNAME: str, PASSWORD: str, SERVER: str) -> json:
         json: Datos finales
     """
 
-    uri = f"mongodb+srv://{USERNAME}:{PASSWORD}@{SERVER}.czf3nfw.mongodb.net/?retryWrites=true&w=majority&appName={SERVER}"
+    uri = f"mongodb+srv://{USERNAME}:{PASSWORD}@{SERVER}/?retryWrites=true&w=majority"
 
     # Crear cliente y conectar al servidor
     client = MongoClient(uri, server_api=ServerApi("1"))
