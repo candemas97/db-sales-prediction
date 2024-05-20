@@ -36,7 +36,7 @@ def reset_opportunity_data(**context) -> None:
     )
 
     # Conectar a la base de datos en MongoDB
-    uri = f"mongodb+srv://{USERNAME}:{PASSWORD}@{SERVER}.czf3nfw.mongodb.net/?retryWrites=true&w=majority&appName={SERVER}"
+    uri = f"mongodb+srv://{USERNAME}:{PASSWORD}@{SERVER}/?retryWrites=true&w=majority&appName={SERVER}"
 
     # Crear cliente y conectar al servidor
     client = MongoClient(uri, server_api=ServerApi("1"))
@@ -78,7 +78,7 @@ def reset_user_data(**context) -> None:
     )
 
     # Conectar a la base de datos en MongoDB
-    uri = f"mongodb+srv://{USERNAME}:{PASSWORD}@{SERVER}.czf3nfw.mongodb.net/?retryWrites=true&w=majority&appName={SERVER}"
+    uri = f"mongodb+srv://{USERNAME}:{PASSWORD}@{SERVER}/?retryWrites=true&w=majority"
 
     # Crear cliente y conectar al servidor
     client = MongoClient(uri, server_api=ServerApi("1"))

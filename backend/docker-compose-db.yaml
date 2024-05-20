@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  redis-cache:
+    image: redis:6.0.9
+    container_name: redis-cache
+    environment:
+      - REDIS_PASSWORD=yourpassword
+    command: ["redis-server", "--requirepass", "yourpassword"]
+    healthcheck:
+      test: redis-cli -h localhost -p 6379 -a $$REDIS_PASSWORD ping]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    ports:
+      - "6380:6379"
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=yourpassword
+    healthcheck:
+      test: mongo --username=$$MONGO_INITDB_ROOT_USERNAME --password=$$MONGO_INITDB_ROOT_PASSWORD --eval db.adminCommand('ping')
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  mariadb:
+    image: mariadb:latest
+    ports:
+      - "3346:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=YourStrong@Passw0rd
+      - MYSQL_DATABASE=MyDatabase
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -uroot -p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
