@@ -11,24 +11,39 @@ En las siguientes líneas se explicará cómo poder usar el backend
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```
 
-5. Agrega el resto de variables necesarias en el `.env`. Las variables servirán para esta sección del `docker-compose`
+5. Agrega el resto de variables necesarias dentro del `.env` que genera **el paso anterior**. Las variables servirán para esta sección del `docker-compose`
 
-```yaml
-# Valores propios
-MONGODB_USER: ${MONGODB_USER}
-MONGODB_PASSWORD: ${MONGODB_PASSWORD}
-MONGODB_SERVER: ${MONGODB_SERVER}
-REDIS_HOST: ${REDIS_HOST}
-REDIS_PORT: ${REDIS_PORT}
-REDIS_PASSWORD: ${REDIS_PASSWORD}
-SQL_USER: ${SQL_USER}
-SQL_PASSWORD: ${SQL_PASSWORD}
-SQL_HOST: ${SQL_HOST}
-SQL_PORT: ${SQL_PORT}
-SQL_DATABASE: ${SQL_DATABASE}
+```
+# Variables LOCALES (no cambiar para que funcione local)
+MONGODB_USER_L=root
+MONGODB_PASSWORD_L=yourpassword
+MONGODB_SERVER_L=mongodb
+
+REDIS_HOST_L=redis-cache
+REDIS_PORT_L=6379
+REDIS_PASSWORD_L=yourpassword
+
+SQL_USER_L=root
+SQL_PASSWORD_L=airflow
+SQL_HOST_L=mysql
+SQL_PORT_L=3306
+SQL_DATABASE_L=project_final
+
+# Valores propios (Cloud) - Modificar con sus valores
+MONGODB_USER=${MONGODB_USER}
+MONGODB_PASSWORD=${MONGODB_PASSWORD}
+MONGODB_SERVER=${MONGODB_SERVER}
+REDIS_HOST=${REDIS_HOST}
+REDIS_PORT=${REDIS_PORT}
+REDIS_PASSWORD=${REDIS_PASSWORD}
+SQL_USER=${SQL_USER}
+SQL_PASSWORD=${SQL_PASSWORD}
+SQL_HOST=${SQL_HOST}
+SQL_PORT=${SQL_PORT}
+SQL_DATABASE=${SQL_DATABASE}
 ```
 
-También servirá para la sección `code-not-automated`
+Se debe copiar todo esto en el archivo `.env` que genera para evitar errores en el codigo
 
 6. Construir las imágenes de docker.
 
@@ -106,6 +121,10 @@ Username: airflow
 Password: airflow
 ```
 
-10. Por último para correr cada instancia, sólo debes presionar el botón a mano izquiera, recuerda que debes hacerlo en el orden mencionado y esperar a que acabe cada ejecución para empezar con la otra (paso `00-reset-data-as-original` no es obligatorio, los otros pasos sí en el orden indicado).
+10. Por último para correr cada instancia, sólo debes presionar el botón a mano izquiera, recuerda que debes hacerlo en el orden mencionado y esperar a que acabe cada ejecución para empezar con la otra 
+
+> [!IMPORTANT]
+> 
+> Si se desea correr Cloud o Local ver abajo qué botones corresponden (con el fin de evitar problemas al momento de ejecución)
 
 ![image 2](./images/image2.png)
