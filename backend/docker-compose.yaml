@@ -51,7 +51,7 @@ x-airflow-common:
   # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
   # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
   # image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.6.0}
-  build: ./docker
+  build: ./docker/airflow
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
@@ -73,7 +73,7 @@ x-airflow-common:
     # for other purpose (development, test and especially production usage) build/extend Airflow image.
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
 
-    # Valores propios
+    # -------------Valores propios
     MONGODB_USER: ${MONGODB_USER}
     MONGODB_PASSWORD: ${MONGODB_PASSWORD}
     MONGODB_SERVER: ${MONGODB_SERVER}
@@ -86,10 +86,23 @@ x-airflow-common:
     SQL_PORT: ${SQL_PORT}
     SQL_DATABASE: ${SQL_DATABASE}
 
+    # --------------- Local VAlor propio
+    MONGODB_USER_L: ${MONGODB_USER_L}
+    MONGODB_PASSWORD_L: ${MONGODB_PASSWORD_L}
+    MONGODB_SERVER_L: ${MONGODB_SERVER_L}
+    REDIS_HOST_L: ${REDIS_HOST_L}
+    REDIS_PORT_L: ${REDIS_PORT_L}
+    REDIS_PASSWORD_L: ${REDIS_PASSWORD_L}
+    SQL_USER_L: ${SQL_USER_L}
+    SQL_PASSWORD_L: ${SQL_PASSWORD_L}
+    SQL_HOST_L: ${SQL_HOST_L}
+    SQL_PORT_L: ${SQL_PORT_L}
+    SQL_DATABASE_L: ${SQL_DATABASE_L}
+
   volumes:
-    - ${AIRFLOW_PROJ_DIR:-.}/docker/code:/opt/airflow/dags
-    - ${AIRFLOW_PROJ_DIR:-.}/docker/logs:/opt/airflow/logs
-    - ${AIRFLOW_PROJ_DIR:-.}/docker/plugins:/opt/airflow/plugins
+    - ${AIRFLOW_PROJ_DIR:-.}/docker/airflow/code:/opt/airflow/dags
+    - ${AIRFLOW_PROJ_DIR:-.}/docker/airflow/logs:/opt/airflow/logs
+    - ${AIRFLOW_PROJ_DIR:-.}/docker/airflow/plugins:/opt/airflow/plugins
 
     # Valores propios
     - ${AIRFLOW_PROJ_DIR:-.}/data:/opt/airflow/data
@@ -118,6 +131,9 @@ services:
       retries: 5
       start_period: 5s
     restart: always
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.22"  # Unique network number
 
   redis:
     image: redis:latest
@@ -130,6 +146,9 @@ services:
       retries: 50
       start_period: 30s
     restart: always
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.21"  # Unique network number
 
   airflow-webserver:
     <<: *airflow-common
@@ -147,6 +166,9 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.20"  # Unique network number
 
   airflow-scheduler:
     <<: *airflow-common
@@ -162,6 +184,9 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.19"  # Unique network number
 
   airflow-worker:
     <<: *airflow-common
@@ -184,6 +209,9 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.18"  # Unique network number
 
   airflow-triggerer:
     <<: *airflow-common
@@ -199,6 +227,9 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.17"  # Unique network number
 
   airflow-init:
     <<: *airflow-common
@@ -263,8 +294,8 @@ services:
           echo "   https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html#before-you-begin"
           echo
         fi
-        mkdir -p /sources/docker/logs /sources/docker/code /sources/docker/plugins /sources/model
-        chown -R "${AIRFLOW_UID}:0" /sources/docker/{logs,code,plugins} /sources/{model}
+        mkdir -p /sources/docker/airflow/logs /sources/docker/airflow/code /sources/docker/airflow/plugins /sources/model
+        chown -R "${AIRFLOW_UID}:0" /sources/docker/airflow/{logs,code,plugins} /sources/{model}
         exec /entrypoint airflow version
     # yamllint enable rule:line-length
     environment:
@@ -277,6 +308,9 @@ services:
     user: "0:0"
     volumes:
       - ${AIRFLOW_PROJ_DIR:-.}:/sources
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.16"  # Unique network number
 
   airflow-cli:
     <<: *airflow-common
@@ -290,6 +324,9 @@ services:
       - bash
       - -c
       - airflow
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.15"  # Unique network number
 
   # You can enable flower by adding "--profile flower" option e.g. docker-compose --profile flower up
   # or by explicitly targeted on the command line e.g. docker-compose up flower.
@@ -312,6 +349,99 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.14"  # Unique network number
+
+  ########################################
+  ### CONTENEDORES PROPIOS
+  ########################################
+
+  jupyter:
+    build: ./docker/jupyter
+    container_name: jupyter
+    ports:
+      - "8088:8088"
+    restart: always
+    volumes:
+    - ./docker/jupyter:/jupyter_code
+    - ./data:/jupyter_code/data
+    - ./model:/jupyter_code/model
+    - ./.env:/jupyter_code/.env
+    stdin_open: true
+    tty: true
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.24"  
+  
+  redis-cache:
+    image: redis:6.0.9
+    container_name: redis-cache
+    environment:
+      - REDIS_PASSWORD=yourpassword
+    command: ["redis-server", "--requirepass", "yourpassword"]
+    healthcheck:
+      test: redis-cli -h localhost -p 6379 -a $$REDIS_PASSWORD ping]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    ports:
+      - "6380:6379"
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.11"  # Unique network number
+      
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=yourpassword
+    healthcheck:
+      test: mongo --username=root --password=yourpassword --eval db.adminCommand('ping')
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.12"  # Unique network number
+    volumes:
+      - mongo_data:/data/db
+      
+
+  mysql:
+    # Service Name
+    image: mysql:latest  # Docker image for SQL Container
+    container_name: mysql
+    ports:
+      - "3307:3306"  # Mapping ports
+    environment:
+      MYSQL_ROOT_PASSWORD: airflow  # Root password
+      MYSQL_DATABASE: project_final  # MySQL database
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]  # Verify health
+      interval: 10s  # Frecuency of health verification
+      timeout: 5s  # Max wait for health verification
+      retries: 3  # Number of retries for health verification
+      start_period: 10s  # Waiting time before health verification
+    restart: always  
+    networks:
+      project_network:
+        ipv4_address: "10.56.1.13"  # Unique network number
 
 volumes:
   postgres-db-volume:
+  mysql_data:
+  mongo_data:
+
+
+networks:
+  project_network:
+    ipam:
+        driver: default
+        config:
+          - subnet: "10.56.1.0/24"
