@@ -12,7 +12,7 @@ import dotenv
 dotenv.load_dotenv()
 
 
-def load_users_sql_local(
+def load_users_sql(
     SQL_USER: str, SQL_PASSWORD: str, SQL_HOST: str, SQL_PORT: str, SQL_DATABASE: str
 ) -> None:
     """Save users to SQL
@@ -50,7 +50,7 @@ def load_users_sql_local(
 Create dag and set the schedule interval
 """
 dag = DAG(
-    "13-Locally-Load-User-MySQL",
+    "03-Load-User-MySQL",
     description="DAG que entrena el modelo",
     start_date=datetime(2024, 5, 3, 0, 0, 00000),
     schedule_interval="@once",  # "@once",
@@ -61,9 +61,9 @@ dag = DAG(
 Task 1: Leer data guardada en MongoDB
 """
 t1 = PythonOperator(
-    task_id="load_users_sql_local",
+    task_id="load_users_sql",
     provide_context=True,
-    python_callable=load_users_sql_local,
+    python_callable=load_users_sql,
     op_kwargs={
         "SQL_USER": os.getenv("SQL_USER_L"),
         "SQL_PASSWORD": os.getenv("SQL_PASSWORD_L"),
