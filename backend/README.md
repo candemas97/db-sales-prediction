@@ -30,17 +30,17 @@ SQL_PORT_L=3306
 SQL_DATABASE_L=project_final
 
 # Valores propios (Cloud) - Modificar con sus valores
-MONGODB_USER=${MONGODB_USER}
-MONGODB_PASSWORD=${MONGODB_PASSWORD}
-MONGODB_SERVER=${MONGODB_SERVER}
-REDIS_HOST=${REDIS_HOST}
-REDIS_PORT=${REDIS_PORT}
-REDIS_PASSWORD=${REDIS_PASSWORD}
-SQL_USER=${SQL_USER}
-SQL_PASSWORD=${SQL_PASSWORD}
-SQL_HOST=${SQL_HOST}
-SQL_PORT=${SQL_PORT}
-SQL_DATABASE=${SQL_DATABASE}
+MONGODB_USER=MONGODB_USER # Cambiar por sus valores
+MONGODB_PASSWORD=MONGODB_PASSWORD # Cambiar por sus valores
+MONGODB_SERVER=MONGODB_SERVER # Cambiar por sus valores
+REDIS_HOST=REDIS_HOST # Cambiar por sus valores
+REDIS_PORT=6379 # Cambiar por sus valores
+REDIS_PASSWORD=REDIS_PASSWORD # Cambiar por sus valores
+SQL_USER=SQL_USER # Cambiar por sus valores
+SQL_PASSWORD=SQL_PASSWORD # Cambiar por sus valores
+SQL_HOST=SQL_HOST # Cambiar por sus valores
+SQL_PORT=3306 # Cambiar por sus valores
+SQL_DATABASE=SQL_DATABASE # Cambiar por sus valores
 ```
 
 Se debe copiar todo esto en el archivo `.env` que genera para evitar errores en el codigo
