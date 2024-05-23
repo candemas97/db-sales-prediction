@@ -69,7 +69,7 @@ def predict_win_or_loose_local(**context) -> json:
         json: Datos predicción
     """
     # Tomar la data del paso anterior
-    data = context["task_instance"].xcom_pull(task_ids="read_data_mongodb")
+    data = context["task_instance"].xcom_pull(task_ids="read_data_mongodb_local")
     df = pd.read_json(data, orient="records")
 
     df = df[["numero_opportunidad",
@@ -105,8 +105,8 @@ def save_data_sql_server_local(
     Graba datos en redis
     """
     # Tomar la data del paso anterior
-    data_inicial = context["task_instance"].xcom_pull(task_ids="read_data_mongodb")
-    data = context["task_instance"].xcom_pull(task_ids="predict_win_or_loose")
+    data_inicial = context["task_instance"].xcom_pull(task_ids="read_data_mongodb_local")
+    data = context["task_instance"].xcom_pull(task_ids="predict_win_or_loose_local")
 
     df_resul = pd.read_json(data_inicial, orient="records")
     df_prediccion = pd.read_json(data, orient="records")
