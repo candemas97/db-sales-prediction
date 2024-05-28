@@ -50,12 +50,34 @@ Desarrollar y entrenar un modelo de machine learning que utilice los datos almac
 
 La arquitectura mostrada en la imagen es un sistema integrado para la recolección, procesamiento y visualización de datos, diseñado para manejar y analizar información de oportunidades de negocio.  
 
+![Arquitectura](imagenes/arq.png)
 
 
+### Componentes 
 
+**Front Entrada (Flutter):** Es la interfaz de usuario desarrollada con Flutter, donde se ingresan los datos de posibles negociaciones. Esta interfaz es el punto de entrada para los datos que serán procesados y analizados. 
 
+**BD JSON - MongoDB Atlas:** Los datos ingresados a través de la interfaz de usuario son almacenados en MongoDB Atlas, una base de datos NoSQL que utiliza un formato JSON documental. Esta base de datos se encarga de manejar los datos desestructurados de la empresa. 
 
+**Modelo (Python):** Un modelo de machine learning ejecutado en Python que realiza procesos ETL (Extract, Transform, Load) y predicciones. Este modelo toma los datos de MongoDB, los procesa y genera predicciones. 
 
+**BD SQL:** Los datos procesados y las predicciones generadas por el modelo en Python son almacenados en una base de datos SQL, que es utilizada para operaciones de reporting y análisis estructurado. 
+
+**Dashboard (Power BI):** Un panel de control que muestra estadísticas generales y resultados obtenidos del modelo de predicción. Este dashboard facilita la visualización y el análisis de los datos. 
+
+**BD Redis:** Actúa como un caché para las predicciones del modelo. Al ser una base de datos en memoria que ofrece alta velocidad en el acceso a datos, permite almacenar y recuperar rápidamente las predicciones que son consultadas frecuentemente por el sistema o los usuarios. 
+
+## Flujo de Datos 
+
+Los datos fluyen principalmente desde la interfaz de usuario hacia MongoDB, luego hacia el modelo en Python, y finalmente a la base de datos SQL y el dashboard. Redis interactúa directamente con el modelo para almacenar y proporcionar acceso rápido a las predicciones. Además, existe un flujo directo entre el front de entrada y Redis para actualizar o recuperar predicciones de manera eficiente.
+
+- Las siguientes son las estructuras de datos que recibe MongoDB desde la interfaz de usuario, dichas estructuras están en formato JSON. 
+
+![JSON](imagenes/json.png)
+
+- El modelo hala la información de estas estructuras almacenadas en MongoDB para realizar el entrenamiento y predicción del resultado de las oportunidades de venta. El modelo es un Random Forest, al que se le aplica una búsqueda de hiperparámetros para encontrar la combinación más eficiente, iterando el número de árboles y la profundidad de estos.
+- El resultado del modelo se guarda junto a las variables iniciales en la base de datos de SQL Server y es enviada al Redis que funciona como caché.
+- La base de datos de SQL es leída desde Power BI junto con la base de datos de los vendedores, que también fue guardada allí, dichas bases siempre van a contener las mismas columnas. A continuación, se muestra el diagrama de entidad relación visualizado en Power BI.
 
 
 
