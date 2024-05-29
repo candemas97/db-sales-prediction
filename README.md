@@ -142,17 +142,17 @@ Para las indicaciones de como usar el proyecto dirigirse a los `README` Del `bac
 4.	**Pruebas de rendimiento:** Se llevarán a cabo pruebas de rendimiento para evaluar la capacidad de la arquitectura para manejar grandes volúmenes de datos y procesar predicciones de manera eficiente. 
 
 ### Casos de Prueba
-**Pruebas de bases de datos:** verificar el funcionamiento adecuado de las bases de datos relacionales (SQL Server) y no relaciones (redis-mongodb), conexión- retorno de datos-almacenamiento de información.
-**Modelo Machine Learning:** 
-- Revisar que el modelo se pueda entrenar correctamente con los datos almacenados.
-- Validar la precisión de la predicción de ventas del modelo.
-**Pruebas de integración**
-- Validar la comunicación entre interfaz de usuario y las bases de datos.
-- Revisar la integración del modelo con las bases de datos.
-**Pruebas de interfaz de usuario**
-- Revisar que la aplicación permita correctamente una autenticación, validando una base datos no relacional.
-- Revisar que el vendedor pueda recolectar información relevante sobre oportunidades de negocio. 
-- Validar que el sistema en tiempo real almacene esta información en las bases de datos. 
+- **Pruebas de bases de datos:** verificar el funcionamiento adecuado de las bases de datos relacionales (SQL Server) y no relaciones (redis-mongodb), conexión- retorno de datos-almacenamiento de información.
+- **Modelo Machine Learning:** 
+    - Revisar que el modelo se pueda entrenar correctamente con los datos almacenados.
+    - Validar la precisión de la predicción de ventas del modelo.
+- **Pruebas de integración**
+    - Validar la comunicación entre interfaz de usuario y las bases de datos.
+    - Revisar la integración del modelo con las bases de datos.
+- **Pruebas de interfaz de usuario**
+    - Revisar que la aplicación permita correctamente una autenticación, validando una base datos no relacional.
+    - Revisar que el vendedor pueda recolectar información relevante sobre oportunidades de negocio. 
+    - Validar que el sistema en tiempo real almacene esta información en las bases de datos. 
 
 ### Resultados Esperados
 **Pruebas Unitarias:**  Todas las funciones individuales pasan las pruebas unitarias sin errores.
@@ -173,15 +173,15 @@ Proporcionar documentación detallada sobre la arquitectura del sistema, incluye
 
 ## 10. Contribuciones
 ### Guía de Contribución
-**Reportar Problemas (Issues):**
-- Si encuentras errores, comportamientos inesperados o tienes sugerencias de mejora, por favor, abre un nuevo issue en nuestro repositorio.
-- Describe el problema de forma clara y concisa, incluyendo pasos para reproducirlo si es posible.
-**Mejorar la Documentación:**
-- Puedes corregir errores tipográficos, añadir explicaciones más detalladas o crear nuevos tutoriales.
-**Desarrollar Nuevas Funcionalidades:**
-- Antes de empezar a trabajar en ella, abre un issue para discutirla con el equipo. Una vez que se apruebe tu propuesta, puedes crear un fork del repositorio, implementar la funcionalidad y enviar un pull request.
-**Corregir Errores (Bugs):**
-- Crea un fork del repositorio, corrige el error y envía un PR con tus cambios.
+- **Reportar Problemas (Issues):**
+    - Si encuentras errores, comportamientos inesperados o tienes sugerencias de mejora, por favor, abre un nuevo issue en nuestro repositorio.
+    - Describe el problema de forma clara y concisa, incluyendo pasos para reproducirlo si es posible.
+- **Mejorar la Documentación:**
+    - Puedes corregir errores tipográficos, añadir explicaciones más detalladas o crear nuevos tutoriales.
+- **Desarrollar Nuevas Funcionalidades:**
+    - Antes de empezar a trabajar en ella, abre un issue para discutirla con el equipo. Una vez que se apruebe tu propuesta, puedes crear un fork del repositorio, implementar la funcionalidad y enviar un pull request.
+- **Corregir Errores (Bugs):**
+    - Crea un fork del repositorio, corrige el error y envía un PR con tus cambios.
 
 ### Políticas de Código
 Todos los cambios deben ser revisados mediante pull requests y aprobados por al menos un revisor antes de fusionarse. Se espera que los contribuyentes escriban pruebas unitarias para nuevas funcionalidades o correcciones de errores. Estas políticas aseguran que el proyecto mantenga una base de código de alta calidad y evolucione de manera organizada.
