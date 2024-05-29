@@ -50,7 +50,7 @@ Desarrollar y entrenar un modelo de machine learning que utilice los datos almac
 
 La arquitectura mostrada en la imagen es un sistema integrado para la recolección, procesamiento y visualización de datos, diseñado para manejar y analizar información de oportunidades de negocio.  
 
-![Arquitectura](imagenes/arq.png)
+![Arquitectura](images/arq.png)
 
 
 ### Componentes 
@@ -73,17 +73,17 @@ Los datos fluyen principalmente desde la interfaz de usuario hacia MongoDB, lueg
 
 - Las siguientes son las estructuras de datos que recibe MongoDB desde la interfaz de usuario, dichas estructuras están en formato JSON. 
 
-![JSON](imagenes/json.png)
+![JSON](images/json.png)
 
 - El modelo hala la información de estas estructuras almacenadas en MongoDB para realizar el entrenamiento y predicción del resultado de las oportunidades de venta. El modelo es un Random Forest, al que se le aplica una búsqueda de hiperparámetros para encontrar la combinación más eficiente, iterando el número de árboles y la profundidad de estos.
 - El resultado del modelo se guarda junto a las variables iniciales en la base de datos de SQL Server y es enviada al Redis que funciona como caché.
 - La base de datos de SQL es leída desde Power BI junto con la base de datos de los vendedores, que también fue guardada allí, dichas bases siempre van a contener las mismas columnas. A continuación, se muestra el diagrama de entidad relación visualizado en Power BI.
 
-![JSON](imagenes/pb.png)
+![PB](images/pb.png)
 
 Por último, se muestra el tablero construido:
 
-![Dashboard](imagenes/dashboard.png)
+![Dashboard](images/dashboard.png)
 
 ## 5. Tecnologías Utilizadas
 
