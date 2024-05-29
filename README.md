@@ -79,14 +79,119 @@ Los datos fluyen principalmente desde la interfaz de usuario hacia MongoDB, lueg
 - El resultado del modelo se guarda junto a las variables iniciales en la base de datos de SQL Server y es enviada al Redis que funciona como caché.
 - La base de datos de SQL es leída desde Power BI junto con la base de datos de los vendedores, que también fue guardada allí, dichas bases siempre van a contener las mismas columnas. A continuación, se muestra el diagrama de entidad relación visualizado en Power BI.
 
+![JSON](imagenes/pb.png)
 
+Por último, se muestra el tablero construido:
 
+![JSON](imagenes/dashboard.png)
 
-En el siguiente proyecto se presentará una solución para la implementación de un algoritmo de Machine Learning utilizando diversas bases de datos como `mongodb`, `redis` y `sql`.
+## 5. Tecnologías Utilizadas
+
+### Lenguajes de Programación
+
+Para el proyecto, se utilizaron dos lenguajes de programación clave. Python se empleó para leer y colocar información en las diferentes bases de datos, así como para el desarrollo del modelo de predicción, se aprovechó la versatilidad de sus bibliotecas para la manipulación de datos, la interacción con bases de datos como MongoDB, Redis y SQL, y la implementación de algoritmos de aprendizaje automático. Por otro lado, el lenguaje utilizado para la aplicación de la interfaz de usuario fue Dart, mediante el framework Flutter. Esta combinación permitió una integración fluida entre el backend de datos, el modelo predictivo y una interfaz de usuario intuitiva y eficiente.
+Frameworks y Librerías
+Para el proyecto, se emplearon diferentes librerías de Python:
+•	Pymongo (4.7.1): Utilizada para interactuar con bases de datos NoSQL de MongoDB, facilitando operaciones de lectura y escritura.
+•	Redis (5.0.1): Empleada para gestionar una base de datos en memoria, proporcionando una capa de caché rápida y fiable.
+•	SQLAlchemy (1.4.48): Usada para la manipulación de bases de datos SQL, ofreciendo una interfaz ORM que simplifica las operaciones de consulta y manipulación de datos.
+•	Pyodbc (5.1.0): Utilizada para establecer conexiones con bases de datos a través de ODBC, se asegura la compatibilidad con una amplia gama de sistemas de gestión de bases de datos.
+•	Python-dotenv (1.0.1): Para manejar variables de entorno de manera segura, esencial para la configuración de la aplicación.
+•	Pandas (2.0.1): Usada para la manipulación y análisis de datos, proporcionando estructuras de datos flexibles y eficientes.
+•	Scikit-learn (1.3.0): Utilizada para implementar algoritmos de aprendizaje automático, permitiendo la creación de modelos predictivos robustos y precisos.
+
+### Plataformas y Servicios
+
+En el desarrollo del proyecto, se emplearon diversas plataformas y servicios. Apache Airflow se utilizó para halar la información guardada en MongoDB (archivo JSON), y entrenamiento del modelo de machine learning. Docker permitió la creación de entornos de desarrollo y producción consistentes y aislados, asegurando que todas las dependencias y configuraciones fueran replicables. SQL Server se usó como base de datos relacional para el almacenamiento estructurado de datos, mientras que MongoDB sirvió como base de datos NoSQL para datos más flexibles y no estructurados. Redis se utilizó como sistema de almacenamiento en caché, mejorando significativamente la velocidad de acceso a datos frecuentemente consultados. Para el desarrollo de la interfaz de usuario, se empleó Flutter, para tener una experiencia de usuario atractiva y responsiva. Además, Python y bibliotecas como Pandas y Scikit-learn se usaron para la manipulación de datos y la implementación del modelo de predicción. Para la visualización y análisis de los datos, se utilizó Power BI, que permitió crear un informe interactivo para facilitar la toma de decisiones.
+
+## 6. Configuración e Instalación
+
+### Requisitos Previos
+**Sistema operativo:**
+•	Linux (recomendado) o macOS
+•	Windows (posible, pero puede requerir pasos adicionales)
+**Hardware:**
+•	CPU: Al menos 4 núcleos
+•	RAM: 8 GB mínimo (16 GB o más recomendado)
+•	Dispositivo móvil con sistema operativo Android superior a 8 para la aplicación realizada en flutter.
+•	Almacenamiento: Espacio suficiente para los datos y modelos
+**Software:**
+•	Python (versión 3.9 o superior)
+•	Docker y Docker Compose
+•	Git (para control de versiones)
+
+### Instrucciones de Instalación
 
 Para poder ejecutar este proyecto se ha generado un `README` tanto para el `backend` como para el `frontend`.
 
-El orden en el cual debe ser ejecutado este proyecto para evitar inocnvenientes es:
+El orden en el cual debe ser ejecutado este proyecto para evitar incnvenientes es:
 
 1. Correr todo el `backend`
 2. Correr todo el `frontend`
+
+## 7. Uso del Proyecto
+
+Para las indicaciones de como usar el proyecto dirigirse a los `README` Del `backend` y el `frontend`.
+
+## 8. Pruebas y Validación
+
+### Estrategia de Pruebas
+1.	**Pruebas unitarias:** se realizan pruebas unitarias en cada componente de la arquitectura, garantizando el correcto funcionamiento individual de cada componente, se probará el código del modelo de machine learning, se incluirá las funciones de interfaz de usuario .
+2.	**Pruebas de integración:**  Se llevará la prueba de integración entre cada uno de los componentes de la arquitectura, esto incluye interfaz de usuario y los modelos de machine learning, se probará la comunicación con las bases de datos (sqlserver)- radis –mongodb, se revisará la consistencia de los datos 
+3.	**Pruebas del sistema:**  Se realizarán pruebas de sistema para evaluar el funcionamiento general de la arquitectura como un todo. Esto implica probar todas las funcionalidades de extremo a extremo, desde la captura de datos por parte de los vendedores hasta la presentación de las predicciones de ventas en el panel de visualización de datos.
+4.	**Pruebas de rendimiento:** Se llevarán a cabo pruebas de rendimiento para evaluar la capacidad de la arquitectura para manejar grandes volúmenes de datos y procesar predicciones de manera eficiente. 
+
+### Casos de Prueba
+•	**Pruebas de bases de datos:** verificar el funcionamiento adecuado de las bases de datos relacionales (SQL Server) y no relaciones (redis-mongodb), conexión- retorno de datos-almacenamiento de información.
+•	**Modelo Machine Learning:** 
+    - Revisar que el modelo se pueda entrenar correctamente con los datos almacenados.
+    - Validar la precisión de la predicción de ventas del modelo.
+•	**Pruebas de integración**
+    - Validar la comunicación entre interfaz de usuario y las bases de datos.
+    - Revisar la integración del modelo con las bases de datos.
+•	**Pruebas de interfaz de usuario**
+    - Revisar que la aplicación permita correctamente una autenticación, validando una base datos no relacional.
+    - Revisar que el vendedor pueda recolectar información relevante sobre oportunidades de negocio. 
+    - Validar que el sistema en tiempo real almacene esta información en las bases de datos. 
+
+### Resultados Esperados
+•	**Pruebas Unitarias:**  Todas las funciones individuales pasan las pruebas unitarias sin errores.
+•	**Pruebas de Integración:** La comunicación entre los componentes de la arquitectura se realiza correctamente.  La integración del modelo de machine learning con los datos almacenados es exitosa.
+•	**Pruebas de Sistema:** Todas las funcionalidades de extremo a extremo funcionan como se esperaba. La presentación de predicciones de ventas en el panel de visualización de datos es precisa y eficiente.
+•	**Pruebas de Rendimiento:** Validar carga de datos sin degradación del rendimiento.
+
+## 9. Mantenimiento y Soporte
+
+### Guia de Mantenimiento
+•	Si se libera en un ambiente productivo, se tendría que revisar periódicamente las bibliotecas utilizadas (versionamiento) en el desarrollo para garantizar la seguridad en la aplicación. 
+•	Mantener un sistema de log en el servidor para hacer seguimiento y evitar un comportamiento no esperado de la aplicación.
+•	Aplicar un sistema de backups del sistema (base de datos y aplicar versionamiento de la aplicación)
+
+### Soporte
+Proporcionar documentación detallada sobre la arquitectura del sistema, incluyendo diagramas de flujo, diagramas de base de datos, y descripciones de componentes clave. Esto ayudará a los desarrolladores y administradores a comprender el funcionamiento del sistema y resolver problemas de manera más eficiente.
+
+
+## 10. Contribuciones
+### Guía de Contribución
+**Reportar Problemas (Issues):**
+•	Si encuentras errores, comportamientos inesperados o tienes sugerencias de mejora, por favor, abre un nuevo issue en nuestro repositorio.
+•	Describe el problema de forma clara y concisa, incluyendo pasos para reproducirlo si es posible.
+**Mejorar la Documentación:**
+•	Puedes corregir errores tipográficos, añadir explicaciones más detalladas o crear nuevos tutoriales.
+**Desarrollar Nuevas Funcionalidades:**
+•	Antes de empezar a trabajar en ella, abre un issue para discutirla con el equipo. Una vez que se apruebe tu propuesta, puedes crear un fork del repositorio, implementar la funcionalidad y enviar un pull request.
+**Corregir Errores (Bugs):**
+•	Crea un fork del repositorio, corrige el error y envía un PR con tus cambios.
+
+### Políticas de Código
+Todos los cambios deben ser revisados mediante pull requests y aprobados por al menos un revisor antes de fusionarse. Se espera que los contribuyentes escriban pruebas unitarias para nuevas funcionalidades o correcciones de errores. Estas políticas aseguran que el proyecto mantenga una base de código de alta calidad y evolucione de manera organizada.
+
+## 11. Licencia
+El código es distribuido bajo la licencia Eclipse Public License - v 2.0. La cuál es declarada en su idioma original en el Anexo 1.
+## 12. Agradecimientos
+Se agradece la realización del proyecto a sus autores:
+•	Yudy Tatiana Pedraza Torres
+•	Carlos Andrés Másmela Pinilla
+•	Fabian Madero Araque
+•	Giovanny Albarracín
+•	Elkin Sánchez
