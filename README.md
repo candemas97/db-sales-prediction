@@ -155,10 +155,10 @@ Para las indicaciones de como usar el proyecto dirigirse a los `README` Del `bac
     - Validar que el sistema en tiempo real almacene esta información en las bases de datos. 
 
 ### Resultados Esperados
-**Pruebas Unitarias:**  Todas las funciones individuales pasan las pruebas unitarias sin errores.
-**Pruebas de Integración:** La comunicación entre los componentes de la arquitectura se realiza correctamente.  La integración del modelo de machine learning con los datos almacenados es exitosa.
-**Pruebas de Sistema:** Todas las funcionalidades de extremo a extremo funcionan como se esperaba. La presentación de predicciones de ventas en el panel de visualización de datos es precisa y eficiente.
-**Pruebas de Rendimiento:** Validar carga de datos sin degradación del rendimiento.
+- **Pruebas Unitarias:**  Todas las funciones individuales pasan las pruebas unitarias sin errores.
+- **Pruebas de Integración:** La comunicación entre los componentes de la arquitectura se realiza correctamente.  La integración del modelo de machine learning con los datos almacenados es exitosa.
+- **Pruebas de Sistema:** Todas las funcionalidades de extremo a extremo funcionan como se esperaba. La presentación de predicciones de ventas en el panel de visualización de datos es precisa y eficiente.
+- **Pruebas de Rendimiento:** Validar carga de datos sin degradación del rendimiento.
 
 ## 9. Mantenimiento y Soporte
 
